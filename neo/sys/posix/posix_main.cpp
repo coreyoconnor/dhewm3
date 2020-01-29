@@ -560,8 +560,10 @@ void tty_Hide() {
 	if ( !tty_enabled ) {
 		return;
 	}
+    Sys_EnterCriticalSection(CRITICAL_SECTION_TWO);
 	if ( input_hide ) {
 		input_hide++;
+        Sys_LeaveCriticalSection(CRITICAL_SECTION_TWO);
 		return;
 	}
 	// clear after cursor
@@ -576,6 +578,7 @@ void tty_Hide() {
 		buf_len--;
 	}
 	input_hide++;
+    Sys_LeaveCriticalSection(CRITICAL_SECTION_TWO);
 }
 
 // show the current line
